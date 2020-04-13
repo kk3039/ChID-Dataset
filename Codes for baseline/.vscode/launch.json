@@ -1,0 +1,24 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "default",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "NLP CHiD",
+      "type": "python",
+      "request": "launch",
+      "program": "/Users/yinglu/Documents/grad_school/nlp/ChID-Dataset/Codes for baseline/main.py",
+      "console": "integratedTerminal",
+      "args": ["--model", "sar", "--port", "49577"],
+      "pythonPath": "/Users/yinglu/.pyenv/versions/3.5.9/bin/python3"
+    }
+  ]
+}
