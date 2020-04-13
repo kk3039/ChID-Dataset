@@ -1,0 +1,8 @@
+.DS_Store
+**/baseline/.python-version
+**/baseline/Models/__pycache__/
+**/baseline/Models/__pycache__/*
+**/baseline/__pycache__
+**/baseline/cache/*
+**/data/
+**/data/*
