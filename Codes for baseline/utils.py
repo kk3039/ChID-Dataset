@@ -12,6 +12,7 @@ class Vocabulary:
     def __init__(self):
         with open("/Users/yinglu/Documents/grad_school/nlp/ChID-Dataset/Codes for baseline/cloth_candidate_dict2.txt") as f:
             id2idiom = re.findall(r'<\w+>|\w+', f.readline())
+            id2idiom = list(dict.fromkeys(id2idiom))
 
         self.id2idiom = ["<PAD>","<UNK>"] + id2idiom
         self.idiom2id = {}
@@ -22,6 +23,7 @@ class Vocabulary:
         # with open("wordList.txt") as f:
         with open("/Users/yinglu/Documents/grad_school/nlp/ChID-Dataset/Codes for baseline/cloth_word_dict2.txt") as f:
             id2word = re.findall(r'<\w+>|\w+', f.readline())
+            id2word = list(dict.fromkeys(id2word))
         self.id2word = ["<PAD>", "<UNK>", "#idiom#"] + id2word
         self.word2id = {}
         for id, word in enumerate(self.id2word):
@@ -29,6 +31,7 @@ class Vocabulary:
         self.unknown_candidate = 0
         self.unknown_word = 0
         self.total_words = 0
+        print("id2idiom %d, idiom2id %d, id2word %d, word2id %d" % (len(self.id2idiom) ,len(self.idiom2id), len(self.id2word), len(self.word2id)))
 
     def return_unknown_index(self):
         return self.idiom2id["<UNK>"], self.word2id["<UNK>"]
