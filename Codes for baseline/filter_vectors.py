@@ -1,6 +1,8 @@
+import re
+import json
 def convertDict (vectorList, wordList, destination):
     dic_str = open(wordList).readline()
-    dic = eval(dic_str)
+    dic = re.findall(r'<\w+>|\w+', dic_str)
     keyFile = open(vectorList, 'r')
     writeFile = open(destination, 'w')
     lines = keyFile.readlines()
@@ -16,5 +18,5 @@ def convertDict (vectorList, wordList, destination):
         
         
 
-convertDict("../data/glove.6B.200d.txt","cloth_word_dict.txt", "cloth_word_vectors.txt")
-convertDict("cloth_word_vectors.txt","cloth_candidate_dict.txt", "cloth_candidate_vectors.txt")
+convertDict("/Users/yinglu/Documents/grad_school/nlp/ChID-Dataset/data/glove.6B.200d.txt","/Users/yinglu/Documents/grad_school/nlp/ChID-Dataset/Codes for baseline/cloth_word_dict.txt", "/Users/yinglu/Documents/grad_school/nlp/ChID-Dataset/Codes for baseline/cloth_word_vectors.txt")
+convertDict("/Users/yinglu/Documents/grad_school/nlp/ChID-Dataset/Codes for baseline/cloth_word_vectors.txt","/Users/yinglu/Documents/grad_school/nlp/ChID-Dataset/Codes for baseline/cloth_candidate_dict.txt", "/Users/yinglu/Documents/grad_school/nlp/ChID-Dataset/Codes for baseline/cloth_candidate_vectors.txt")

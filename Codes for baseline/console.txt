@@ -1,0 +1,18 @@
+*** Finish building vocabulary
+Numbers of words and idioms: 25640 11204
+dic 22817, matrix 22817, lost_cnt 4345
+dic 10867, matrix 10867, lost_cnt 741
+*** 741 idioms and 4345 words not found
+*** Embed matrixs built
+word_embed_matrix:0: (22817, 200)
+idiom_embed_matrix:0: (10867, 200)
+doc/bi_lstm/fw/lstm_cell/kernel:0: (300, 400)
+doc/bi_lstm/fw/lstm_cell/bias:0: (400,)
+doc/bi_lstm/bw/lstm_cell/kernel:0: (300, 400)
+doc/bi_lstm/bw/lstm_cell/bias:0: (400,)
+ym_weight:0: (200, 200)
+um_weight:0: (200, 200)
+ms_weight:0: (200,)
+rg_weight:0: (200, 200)
+ug_weight:0: (200, 200)
+Created model with fresh parameters.

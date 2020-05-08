@@ -16,7 +16,6 @@ class Model(BasicModel):
 
         super(Model, self).__init__()
         super(Model, self)._create_embedding(init_word_embed, init_idiom_embed)
-
         doc_embedding = tf.cond(self.is_train,
                                 lambda: tf.nn.dropout(tf.nn.embedding_lookup(self.word_embed_matrix, self.document), 0.5),
                                 lambda: tf.nn.embedding_lookup(self.word_embed_matrix, self.document))

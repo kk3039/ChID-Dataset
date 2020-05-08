@@ -1,0 +1,36 @@
+*** Finish building vocabulary
+Numbers of words and idioms: 16806 7974
+*** Embed matrixs built
+word_embed_matrix:0: (16809, 200)
+idiom_embed_matrix:0: (7975, 200)
+doc/bi_lstm/fw/lstm_cell/kernel:0: (300, 400)
+doc/bi_lstm/fw/lstm_cell/bias:0: (400,)
+doc/bi_lstm/bw/lstm_cell/kernel:0: (300, 400)
+doc/bi_lstm/bw/lstm_cell/bias:0: (400,)
+ym_weight:0: (200, 200)
+um_weight:0: (200, 200)
+ms_weight:0: (200,)
+rg_weight:0: (200, 200)
+ug_weight:0: (200, 200)
+Reading model parameters from train/ar
+*** DEV  acc 0.45953  loss 1.309  single_acc 0.00000  multi_acc 0.45953
+step 1100  lr 0.001000  acc 0.7211  time 3.832  loss 0.693 unk can 1684
+step 1200  lr 0.001000  acc 0.6705  time 3.703  loss 0.788 unk can 321
+step 1300  lr 0.001000  acc 0.7470  time 3.376  loss 0.627 unk can 2508
+step 1400  lr 0.001000  acc 0.7380  time 3.297  loss 0.627 unk can 685
+step 1500  lr 0.001000  acc 0.7539  time 3.767  loss 0.614 unk can 3326
+step 1600  lr 0.001000  acc 0.8097  time 3.077  loss 0.482 unk can 1184
+step 1700  lr 0.001000  acc 0.7784  time 3.866  loss 0.570 unk can 124
+step 1800  lr 0.001000  acc 0.8395  time 3.158  loss 0.417 unk can 2033
+step 1900  lr 0.001000  acc 0.8183  time 3.555  loss 0.460 unk can 467
+step 2000  lr 0.001000  acc 0.8431  time 3.536  loss 0.406 unk can 2840
+*** DEV  acc 0.46179  loss 1.662  single_acc 0.00000  multi_acc 0.46179
+**  New best iteration  2000
+*   Best iteration  2000
+step 2100  lr 0.001000  acc 0.8586  time 3.127  loss 0.363 unk can 807
+step 2200  lr 0.001000  acc 0.8493  time 3.933  loss 0.399 unk can 3633
+step 2300  lr 0.001000  acc 0.8964  time 3.032  loss 0.290 unk can 1512
+step 2400  lr 0.001000  acc 0.8708  time 3.715  loss 0.343 unk can 259
+step 2500  lr 0.001000  acc 0.9033  time 3.310  loss 0.269 unk can 2330
+step 2600  lr 0.001000  acc 0.8987  time 3.372  loss 0.275 unk can 630
+step 2700  lr 0.001000  acc 0.9015  time 3.666  loss 0.272 unk can 3138

@@ -35,7 +35,6 @@ num_words, num_idioms = dataManager.get_num()
 word_embed_matrix, idiom_embed_matrix = dataManager.get_embed_matrix()
 
 
-
 def prepare_batch_data(document, candidates, ori_labels, ori_locs):
     # padding docs
     batch_size = len(document)
@@ -86,7 +85,7 @@ def valid(sess, model, mode="dev", record=False):
 
     acc_blank = np.zeros((2, 2), dtype=np.float32)
 
-    for doc, can, lab, loc in total_data:
+    for doc, can, lab, loc, unknown_candidate, unknown_word, total_words in total_data:
         document.append(doc)
         candidates.append(can)
         ori_labels.append(lab)
@@ -147,7 +146,8 @@ def valid(sess, model, mode="dev", record=False):
     avg_loss = total_loss / count
 
     print(
-        "*** " + mode.upper() + "  acc %.5f  loss %.3f  single_acc %.5f  multi_acc %.5f" % (acc, avg_loss, acc_single, acc_multi))
+        "*** " + mode.upper() + "  acc %.5f  loss %.3f  single_acc %.5f multi_acc %.5f unk can %d, unk word %d, total word, %d" \
+            % (acc, avg_loss, acc_single, acc_multi, unknown_candidate, unknown_word, total_words))
 
     return acc, avg_loss
 
@@ -169,8 +169,8 @@ def train(sess, model):
     document, candidates, ori_labels, ori_locs = [], [], [], []
     for _ in range(10):
         total_data = dataManager.train()
+        for doc, can, lab, loc, unknown_candidate, unknown_word, total_words in total_data:
 
-        for doc, can, lab, loc in total_data:
             document.append(doc)
             candidates.append(can)
             ori_labels.append(lab)
@@ -186,18 +186,18 @@ def train(sess, model):
                 acc_array += caculate_acc(ori_labels, train_result[1])[0]
                 count += 1
 
-                if model.global_step.eval() % 100 == 0:
+                if model.global_step.eval() % 10 == 0:
                     temp_avg_time = (time.time() - st_time) / count
                     temp_avg_loss = total_loss / count
                     acc = acc_array[0] / acc_array[1]
-                    record_str = "step %d  lr %.6f  acc %.4f  time %.3f  loss %.3f" % \
-                                 (model.global_step.eval(), model.lr.eval(), acc, temp_avg_time, temp_avg_loss)
+                    record_str = "step %d  lr %.6f  acc %.4f  time %.3f  loss %.3f unk can %d, unk word %d, total word, %d" % \
+                                 (model.global_step.eval(), model.lr.eval(), acc, temp_avg_time, temp_avg_loss, unknown_candidate, unknown_word, total_words)
                     print(record_str)
 
                     #f.write(record_str + "\n")
                     #acc_list.append(acc)
 
-                    if model.global_step.eval() % 1000 == 0:
+                    if model.global_step.eval() % 100 == 0:
                         dev_acc, dev_loss = valid(sess, model, "dev")
                         if dev_acc > best_dev_acc:
                             model.saver.save(sess, "%s/checkpoint" % train_dir, global_step=model.global_step)

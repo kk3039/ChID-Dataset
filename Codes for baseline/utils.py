@@ -10,30 +10,47 @@ import numpy as np
 
 class Vocabulary:
     def __init__(self):
-        with open("idiomList.txt") as f:
-            id2idiom = eval(f.readline())
+        with open("/Users/yinglu/Documents/grad_school/nlp/ChID-Dataset/Codes for baseline/cloth_candidate_dict2.txt") as f:
+            id2idiom = re.findall(r'<\w+>|\w+', f.readline())
 
-        self.id2idiom = ["<PAD>"] + id2idiom
+        self.id2idiom = ["<PAD>","<UNK>"] + id2idiom
         self.idiom2id = {}
+        
         for id, idiom in enumerate(self.id2idiom):
             self.idiom2id[idiom] = id
 
-        with open("wordList.txt") as f:
-            id2word = eval(f.readline())[:100000]
-
+        # with open("wordList.txt") as f:
+        with open("/Users/yinglu/Documents/grad_school/nlp/ChID-Dataset/Codes for baseline/cloth_word_dict2.txt") as f:
+            id2word = re.findall(r'<\w+>|\w+', f.readline())
         self.id2word = ["<PAD>", "<UNK>", "#idiom#"] + id2word
         self.word2id = {}
         for id, word in enumerate(self.id2word):
             self.word2id[word] = id
+        self.unknown_candidate = 0
+        self.unknown_word = 0
+        self.total_words = 0
+
+    def return_unknown_index(self):
+        return self.idiom2id["<UNK>"], self.word2id["<UNK>"]
+
+    def return_unknown_counts(self):
+        return self.unknown_candidate, self.unknown_word, self.total_words
+        
 
 
     def tran2id(self, token, is_idiom=False):
+        self.total_words += 1 
         if is_idiom:
-            return self.idiom2id[token]
+            if token in self.idiom2id:
+                return self.idiom2id[token]
+            else:
+                self.unknown_candidate +=1
+                return self.idiom2id["<UNK>"]
         else:
             if token in self.word2id:
                 return self.word2id[token]
             else:
+                self.unknown_word +=1
                 return self.word2id["<UNK>"]
 
 
