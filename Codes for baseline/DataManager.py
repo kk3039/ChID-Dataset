@@ -86,7 +86,7 @@ class DataManager:
 
     def train(self):
         difficulty_set = ["middle", "high"]
-        data_dir = "/Users/yinglu/Documents/grad_school/nlp/Large-scale-Cloze-Test-Dataset-Created-by-Teachers-master/data/CLOTH/"
+        data_dir = "../CLOTH/"
         for d in difficulty_set:
             new_path = os.path.join(data_dir, "train", d)
             for inf in os.listdir(new_path):
@@ -100,7 +100,7 @@ class DataManager:
 
     def valid(self, mode="dev"): # "dev" or "test" or "out"
         difficulty_set = ["middle", "high"]
-        data_dir = "/Users/yinglu/Documents/grad_school/nlp/Large-scale-Cloze-Test-Dataset-Created-by-Teachers-master/data/CLOTH/"
+        data_dir = "../CLOTH/"
 
         for d in difficulty_set:
             new_path = os.path.join(data_dir, "test", d)
@@ -147,8 +147,8 @@ class DataManager:
             # self.word_embed_matrix, lost_word = embed_matrix("../data/wordvector.txt", self.vocab.word2id)
             # self.idiom_embed_matrix, lost_idiom = embed_matrix("../data/idiomvector.txt", self.vocab.idiom2id)
             
-            self.word_embed_matrix, lost_word = embed_matrix("/Users/yinglu/Documents/grad_school/nlp/ChID-Dataset/Codes for baseline/cloth_word_vectors2.txt", self.vocab.word2id)
-            self.idiom_embed_matrix, lost_idiom = embed_matrix("/Users/yinglu/Documents/grad_school/nlp/ChID-Dataset/Codes for baseline/cloth_candidate_vectors2.txt", self.vocab.idiom2id)
+            self.word_embed_matrix, lost_word = embed_matrix("cloth_word_vectors2.txt", self.vocab.word2id)
+            self.idiom_embed_matrix, lost_idiom = embed_matrix("cloth_candidate_vectors2.txt", self.vocab.idiom2id)
             self.word_embed_matrix = np.array(self.word_embed_matrix, dtype=np.float32)
             self.idiom_embed_matrix = np.array(self.idiom_embed_matrix, dtype=np.float32)
             np.save("cache/word_embed_matrix.npy", self.word_embed_matrix)

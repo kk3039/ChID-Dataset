@@ -167,7 +167,11 @@ def train(sess, model):
     prev_loss = [1e15, 1e15]
 
     document, candidates, ori_labels, ori_locs = [], [], [], []
-    for _ in range(10):
+    try:
+        best_iter
+    except NameError:
+        best_iter = 6900
+    for _ in range(100):
         total_data = dataManager.train()
         for doc, can, lab, loc, unknown_candidate, unknown_word, total_words in total_data:
 
@@ -186,7 +190,7 @@ def train(sess, model):
                 acc_array += caculate_acc(ori_labels, train_result[1])[0]
                 count += 1
 
-                if model.global_step.eval() % 10 == 0:
+                if model.global_step.eval() % 20 == 0:
                     temp_avg_time = (time.time() - st_time) / count
                     temp_avg_loss = total_loss / count
                     acc = acc_array[0] / acc_array[1]
@@ -197,13 +201,14 @@ def train(sess, model):
                     #f.write(record_str + "\n")
                     #acc_list.append(acc)
 
-                    if model.global_step.eval() % 100 == 0:
+                    if model.global_step.eval() % 200 == 0:
                         dev_acc, dev_loss = valid(sess, model, "dev")
                         if dev_acc > best_dev_acc:
                             model.saver.save(sess, "%s/checkpoint" % train_dir, global_step=model.global_step)
                             best_dev_acc = dev_acc
                             best_iter = model.global_step.eval()
                             print("**  New best iteration  %d" % best_iter)
+
                         print("*   Best iteration  %d" % best_iter)
 
                         if dev_loss > max(prev_loss):

@@ -10,7 +10,7 @@ import numpy as np
 
 class Vocabulary:
     def __init__(self):
-        with open("/Users/yinglu/Documents/grad_school/nlp/ChID-Dataset/Codes for baseline/cloth_candidate_dict2.txt") as f:
+        with open("cloth_candidate_dict2.txt") as f:
             id2idiom = re.findall(r'<\w+>|\w+', f.readline())
             id2idiom = list(dict.fromkeys(id2idiom))
 
@@ -21,7 +21,7 @@ class Vocabulary:
             self.idiom2id[idiom] = id
 
         # with open("wordList.txt") as f:
-        with open("/Users/yinglu/Documents/grad_school/nlp/ChID-Dataset/Codes for baseline/cloth_word_dict2.txt") as f:
+        with open("cloth_word_dict2.txt") as f:
             id2word = re.findall(r'<\w+>|\w+', f.readline())
             id2word = list(dict.fromkeys(id2word))
         self.id2word = ["<PAD>", "<UNK>", "#idiom#"] + id2word
